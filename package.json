@@ -1,5 +1,6 @@
 {
   "name": "textpad",
+  "version": "0.0.1",
   "description": "Simple app for text transformation.",
   "engines": {
     "node": "^18.17.0 || ^20.3.0 || >=21.0.0"

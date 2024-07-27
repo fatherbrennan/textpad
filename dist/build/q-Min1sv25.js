@@ -1,0 +1,1 @@
+import{x as e}from"./q-CqTezyzO.js";const r=()=>e("header",null,{class:"absolute top-0 h-header w-full border-b-4 border-double bg-paper"},e("h1",null,{class:"flex h-full items-center justify-center text-lg underline"},"Textpad",3,null),3,"q0_0");export{r as s_m3VgqhIL0lw};
