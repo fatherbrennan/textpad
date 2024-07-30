@@ -43,6 +43,7 @@ export default component$(() => {
         </button>
       </div>
       <textarea
+        autoFocus
         name={textarea}
         id={textarea}
         title={textarea}
