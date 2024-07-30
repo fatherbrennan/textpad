@@ -10,7 +10,6 @@ export default component$(() => {
   const copy: QRL<() => Promise<void>> = $(async () => {
     try {
       isCopying.value = true;
-      console.log(v.value);
       await navigator.clipboard.writeText(v.value);
       setTimeout(() => (isCopying.value = false), 1000);
     } catch (error) {
