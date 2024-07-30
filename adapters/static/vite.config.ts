@@ -13,7 +13,7 @@ export default extendConfig(baseConfig, () => {
     },
     plugins: [
       staticAdapter({
-        origin: 'https://fatherbrennan.github.com/textpad',
+        origin: 'https://fatherbrennan.github.com',
       }),
     ],
   };
