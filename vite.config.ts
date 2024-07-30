@@ -5,10 +5,13 @@
 import { qwikCity } from '@builder.io/qwik-city/vite';
 import { qwikVite } from '@builder.io/qwik/optimizer';
 import { resolve } from 'path';
-import { defineConfig, type UserConfig } from 'vite';
+import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 import pkg from './package.json';
+
+import type { UserConfig } from 'vite';
+
 
 type PkgDep = Record<string, string>;
 
@@ -51,6 +54,7 @@ export default defineConfig(({ command, mode }): UserConfig => {
     //     : undefined,
 
     server: {
+      port: 5173,
       headers: {
         // Don't cache the server response in dev mode
         'Cache-Control': 'public, max-age=0',
