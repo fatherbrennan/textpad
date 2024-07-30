@@ -7,9 +7,10 @@ export default component$(() => {
   const isCopying = useSignal(false);
   const textarea = 'textpad';
 
-  const onCopy: QRL<PropsOf<'button'>['onClick$']> = $(async () => {
+  const copy: QRL<() => Promise<void>> = $(async () => {
     try {
       isCopying.value = true;
+      console.log(v.value);
       await navigator.clipboard.writeText(v.value);
       setTimeout(() => (isCopying.value = false), 1000);
     } catch (error) {
@@ -17,14 +18,23 @@ export default component$(() => {
     }
   });
 
-  const onInput: QRL<PropsOf<'textarea'>['onInput$']> = $((_event, { value }) => {
+  const transform: QRL<(value: string) => void> = $((value: string) => {
     v.value = value.replace(/\n/g, ' ');
+  });
+
+  const onInput: QRL<PropsOf<'textarea'>['onInput$']> = $(async (_event, { value }) => {
+    await transform(value);
+  });
+
+  const onPaste: QRL<PropsOf<'textarea'>['onPaste$']> = $(async (_event, { value }) => {
+    await transform(value);
+    await copy();
   });
 
   return (
     <div class="flex h-full flex-grow flex-col">
       <div class="flex flex-row-reverse pb-2 text-ink">
-        <button type="button" class="rounded-sm p-1 outline-black hover:bg-[#ededeb]" onClick$={onCopy} title={`Cop${isCopying.value ? 'ied' : 'y'} to cliboard`}>
+        <button type="button" class="rounded-sm p-1 outline-black hover:bg-[#ededeb]" onClick$={copy} title={`Cop${isCopying.value ? 'ied' : 'y'} to cliboard`}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-6">
             <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
               <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" />
@@ -42,6 +52,7 @@ export default component$(() => {
         fetchPriority="high"
         value={v.value}
         onInput$={onInput}
+        onPaste$={onPaste}
       ></textarea>
     </div>
   );
