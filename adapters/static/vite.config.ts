@@ -11,6 +11,7 @@ export default extendConfig(baseConfig, () => {
         input: ['@qwik-city-plan'],
       },
     },
+    base: '/textpad',
     plugins: [
       staticAdapter({
         origin: 'https://fatherbrennan.github.com',
