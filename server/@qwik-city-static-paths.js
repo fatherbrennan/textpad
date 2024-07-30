@@ -1,13 +1,13 @@
-const staticPaths = new Set(["/","/favicon.svg","/manifest.json","/q-manifest.json","/qwik-prefetch-service-worker.js","/robots.txt","/service-worker.js","/sitemap.xml"]);
+const staticPaths = new Set(["/textpad/","/textpad/sitemap.xml"]);
 function isStaticPath(method, url) {
   if (method.toUpperCase() !== 'GET') {
     return false;
   }
   const p = url.pathname;
-  if (p.startsWith("/build/")) {
+  if (p.startsWith("/textpad/build/")) {
     return true;
   }
-  if (p.startsWith("/assets/")) {
+  if (p.startsWith("/textpad/assets/")) {
     return true;
   }
   if (staticPaths.has(p)) {
